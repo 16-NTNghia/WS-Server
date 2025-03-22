@@ -11,4 +11,9 @@ class User extends Entity
       'IsDeleted' => false,
    ];
 
+   public function setPasswordAttribute($value)
+   {
+      $this->attributes['Password'] = password_hash($value, PASSWORD_BCRYPT);
+   }
+
 }
