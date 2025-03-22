@@ -5,7 +5,7 @@ Dự án **WS-Server** là một Server API đơn giản được xây dựng b�
 
 ### PROJECT STRUCTURE
 ```
-PHP-API-Structure/
+WS-Server/
 ◉ app/             # Chứa mã nguồn chính của API
 ◉ config/          # Cấu hình hệ thống
 ◉ database/        # Chứa mã SQL
