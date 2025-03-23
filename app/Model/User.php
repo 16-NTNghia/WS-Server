@@ -10,6 +10,7 @@ class User extends Entity
    protected $attributes = [
       'IsDeleted' => false,
    ];
+   protected $hidden = ['Password'];
 
    public function setPasswordAttribute($value)
    {
