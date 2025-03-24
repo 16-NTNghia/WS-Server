@@ -67,7 +67,7 @@ class AuthService
          }
       }
 
-      $user = $this->userService->findByUsername($data['username']);
+      $user = $this->userService->findUser('Username', $data['username']);
 
       if (!password_verify($data['password'], $user->Password)) {
          throw new Exception('Password không đúng');
@@ -97,7 +97,7 @@ class AuthService
          }
 
          $userId = $decoded->sub;
-         $user = User::find($userId);
+         $user = $user = $this->userService->findUser('IDUser', $userId);
 
          if (!$user || $user->IsDeleted) {
             throw new Exception('User không tồn tại hoặc đã bị xóa');

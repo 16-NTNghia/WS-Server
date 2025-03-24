@@ -24,14 +24,14 @@ class UserService
       ]);
    }
 
-   public function findByUsername($username)
+   public function findUser($field, $value)
    {
-      $user = User::where('Username', $username)
+      $user = User::where($field, $value)
          ->where('IsDeleted', false)
          ->first();
 
       if (!$user) {
-         throw new Exception('Tài khoản không tồn tại');
+         throw new Exception('Người dùng không tồn tại');
       }
 
       return $user;
