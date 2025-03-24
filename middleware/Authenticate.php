@@ -7,7 +7,7 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response; // Import Response
+use Illuminate\Http\Response;
 use Utils\EnvironmentVariable;
 use WorkSpace\Service\UserService;
 
@@ -49,11 +49,10 @@ class Authenticate
             $user = $this->userService->findUser('IDUser', $decoded->sub);
 
             // Lưu thông tin user vào request để sử dụng ở controller
-            $request->attributes->set('user', [
-                'id' => $decoded->sub,
-                'username' => $decoded->username,
-                'email' => $user->Email,
-                'display_name' => $user->DisplayName
+            $request->attributes->set('USER', [
+                'IDUser' => $decoded->sub,
+                'Username' => $decoded->username,
+                'Email' => $user->Email,
             ]);
 
             // Tiếp tục xử lý request

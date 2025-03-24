@@ -6,10 +6,18 @@ use Illuminate\Http\Request;
 
 class HomeController
 {
-   public function root(Request $request)
+   public function root()
    {
-      print_r($request->attributes->get('user'));
-      return $request->attributes->get('user');
-      // return '🚀 WS-Server is running 🚀';
+      return '🚀 WS-Server is running 🚀';
+   }
+
+   public function getUserInfoFromRequest(Request $request): JsonResponse
+   {
+      $user = $request->attributes->get('USER');
+      // print_r($user);
+      return new JsonResponse([
+         'message' => 'User Inf',
+         'user' => $user
+      ], 200);
    }
 }
