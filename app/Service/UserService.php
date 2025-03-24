@@ -23,4 +23,17 @@ class UserService
          "Password" => $data["password"],
       ]);
    }
+
+   public function findByUsername($username)
+   {
+      $user = User::where('Username', $username)
+         ->where('IsDeleted', false)
+         ->first();
+
+      if (!$user) {
+         throw new Exception('Tài khoản không tồn tại');
+      }
+
+      return $user;
+   }
 }

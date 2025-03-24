@@ -27,7 +27,23 @@ class AuthController
             'message' => $e->getMessage(),
          ], 400);
       }
+   }
 
+   public function Login(Request $request): JsonResponse
+   {
+      try {
+         $credentials = $request->json()->all();
+         $result = $this->AuthService->login($credentials);
+
+         return new JsonResponse([
+            'message' => 'Đăng nhập thành công',
+            'data' => $result
+         ], 200);
+      } catch (Exception $e) {
+         return new JsonResponse([
+            'message' => $e->getMessage(),
+         ], 401);
+      }
    }
 
 }

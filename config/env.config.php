@@ -1,6 +1,15 @@
 <?php
+use Dotenv\Dotenv;
+
 $ENVIRONMENT = getenv('APP_ENV') ?: 'development'; //TODO: Change to production
-$DOTENV = Dotenv\Dotenv::createImmutable(__DIR__ . '/../', ".env.{$ENVIRONMENT}");
+$envFile = ".env.{$ENVIRONMENT}";
+$baseDir = __DIR__ . '/../';
+
+if (!file_exists($baseDir . $envFile)) {
+   $envFile = '.env';
+}
+
+$DOTENV = Dotenv::createImmutable($baseDir, $envFile);
 $DOTENV->safeLoad();
 
 $ENVCONFIG = [
@@ -15,6 +24,18 @@ $ENVCONFIG = [
       'USERNAME' => $_ENV['DB_USERNAME'],
       'PASSWORD' => $_ENV['DB_PASSWORD'],
    ],
+   'JWT' => [
+      'SECRET' => $_ENV['JWT_SECRET'],
+      'EXPIRES_IN' => $_ENV['JWT_EXPIRES_IN'],
+      'ACCESS_TOKEN' => [
+         'SECRET' => $_ENV['ACCESS_TOKEN_SECRET'],
+         'EXPIRES_IN' => $_ENV['ACCESS_TOKEN_EXPIRES_IN'],
+      ],
+      'REFRESH_TOKEN' => [
+         'SECRET' => $_ENV['REFRESH_TOKEN_SECRET'],
+         'EXPIRES_IN' => $_ENV['REFRESH_TOKEN_EXPIRES_IN'],
+      ],
+   ]
 ];
 
 return $ENVCONFIG;
