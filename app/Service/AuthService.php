@@ -4,7 +4,6 @@ use WorkSpace\Service\UserService;
 use Firebase\JWT\JWT;
 use Utils\EnvironmentVariable;
 use Exception;
-use WorkSpace\Model\User;
 use Firebase\JWT\Key;
 
 class AuthService
