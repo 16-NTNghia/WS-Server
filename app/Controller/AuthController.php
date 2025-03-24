@@ -46,4 +46,21 @@ class AuthController
       }
    }
 
+   public function RefreshToken(Request $request): JsonResponse
+   {
+      try {
+         $refreshToken = $request->json('refresh_token');
+         $result = $this->AuthService->refreshAccessToken($refreshToken);
+
+         return new JsonResponse([
+            'message' => 'Lấy access_token mới thành công',
+            'data' => $result
+         ], 200);
+      } catch (Exception $e) {
+         return new JsonResponse([
+            'message' => $e->getMessage(),
+         ], 401);
+      }
+   }
+
 }
