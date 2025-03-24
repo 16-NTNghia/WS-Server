@@ -5,7 +5,8 @@
 	"autoload": {
 		"psr-4": {
 			"WorkSpace\\": "app/",
-			"Utils\\": "utils/"
+			"Utils\\": "utils/",
+			"Middleware\\": "middleware/"
 		}
 	},
 	"authors": [

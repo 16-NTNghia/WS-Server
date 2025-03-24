@@ -2,9 +2,12 @@
 use Illuminate\Routing\Router;
 use WorkSpace\Controller\AuthController;
 use WorkSpace\Controller\HomeController;
+use Middleware\Authenticate;
 
 return function (Router $router) {
-   $router->group(['prefix' => '/'], function (Router $router) {
+   $router->aliasMiddleware('auth', Authenticate::class);
+   
+   $router->group(['prefix' => '/', 'middleware' => 'auth'], function (Router $router) {
       $router->get('/', [HomeController::class, 'root']);
    });
 
