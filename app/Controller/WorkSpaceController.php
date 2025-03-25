@@ -14,14 +14,13 @@ class WorkSpaceController
       $this->WSService = $WSService;
    }
 
-   public function index(Request $request): JsonResponse
+   public function getWorkSpacesByIDUser(Request $request): JsonResponse
    {
       try {
          $IDUser = $request->attributes->get('USER')['IDUser'];
-         print_r($IDUser);
          $workspaces = $this->WSService->getAllWorkSpaces($IDUser);
          return new JsonResponse([
-            'message' => 'Danh sách WorkSpace',
+            'message' => 'WorkSpace List',
             'data' => $workspaces
          ], 200);
       } catch (Exception $e) {
@@ -31,13 +30,13 @@ class WorkSpaceController
       }
    }
 
-   public function create(Request $request): JsonResponse
+   public function createWorkSpace(Request $request): JsonResponse
    {
       try {
          $IDUser = $request->attributes->get('USER')['IDUser'];
          $workSpace = $this->WSService->createWorkSpace($request->json()->all(), $IDUser);
          return new JsonResponse([
-            'message' => 'Tạo WorkSpace thành công',
+            'message' => 'Created WorkSpace Successfully',
             'data' => $workSpace
          ], 201);
       } catch (Exception $e) {

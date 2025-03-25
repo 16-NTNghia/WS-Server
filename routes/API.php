@@ -1,17 +1,21 @@
 <?php
 use Illuminate\Routing\Router;
 use WorkSpace\Controller\AuthController;
-use WorkSpace\Controller\HomeController;
+use WorkSpace\Controller\SystemController;
 use WorkSpace\Controller\WorkSpaceController;
 use Middleware\Authenticate;
 
 return function (Router $router) {
    $router->aliasMiddleware('auth', Authenticate::class);
-   
+
+   //--------------------------------------------------HOME--------------------------------------------------//
+
    $router->group(['prefix' => '/'], function (Router $router) {
-      $router->get('/', [HomeController::class, 'root']);
-      $router->get('/user-inf', [HomeController::class, 'getUserInfoFromRequest'])->middleware('auth');
+      $router->get('/', [SystemController::class, 'root']);
+      $router->get('/user-inf', [SystemController::class, 'getUserInfoFromRequest'])->middleware('auth');
    });
+
+   //--------------------------------------------------AUTH--------------------------------------------------//
 
    $router->group(['prefix' => 'auth'], function (Router $router) {
       $router->post('/register', [AuthController::class, 'Register']);
@@ -19,8 +23,10 @@ return function (Router $router) {
       $router->post('/refresh-token', [AuthController::class, 'RefreshToken']);
    });
 
-   $router->group(['prefix'=> 'workspace'], function (Router $router){
-      $router->get('/',[WorkSpaceController::class, 'index'])->middleware('auth');
-      $router->post('/',[WorkSpaceController::class, 'create'])->middleware('auth');
+   //--------------------------------------------------WORKSPACE--------------------------------------------------//
+
+   $router->group(['prefix' => 'workspace', 'middleware' => 'auth'], function (Router $router) {
+      $router->get('/', [WorkSpaceController::class, 'getWorkSpacesByIDUser']);
+      $router->post('/', [WorkSpaceController::class, 'createWorkSpace']);
    });
 };

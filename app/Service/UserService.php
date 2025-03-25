@@ -8,12 +8,26 @@ class UserService
 {
    public function createUser($data)
    {
-      if (User::where('Username', $data['username'])->exists()) {
-         throw new Exception('Username đã tồn tại');
+      $requiredFields = [
+         'username' => 'Password is required',
+         'email' => 'Email is required',
+         'password' => 'Password is required'
+      ];
+
+      foreach ($requiredFields as $field => $message) {
+         if (empty($data[$field])) {
+            throw new Exception($message);
+         }
       }
 
-      if (User::where('Email', $data['email'])->exists()) {
-         throw new Exception('Email đã tồn tại');
+      $exists = User::where('Username', $data['username'])
+         ->orWhere('Email', $data['email'])
+         ->exists();
+
+      if ($exists) {
+         $field = User::where('Username', $data['username'])->exists()
+            ? 'Username' : 'Email';
+         throw new Exception($field . ' already exists');
       }
 
       return User::create([
@@ -31,7 +45,7 @@ class UserService
          ->first();
 
       if (!$user) {
-         throw new Exception('Người dùng không tồn tại');
+         throw new Exception('User does not exist');
       }
 
       return $user;

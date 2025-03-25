@@ -56,8 +56,8 @@ class AuthService
    public function login($data)
    {
       $requiredFields = [
-         'username' => 'Username không được để trống',
-         'password' => 'Password không được để trống',
+         'username' => 'Username is required',
+         'password' => 'Password is required',
       ];
 
       foreach ($requiredFields as $field => $message) {
@@ -69,7 +69,7 @@ class AuthService
       $user = $this->userService->findUser('Username', $data['username']);
 
       if (!password_verify($data['password'], $user->Password)) {
-         throw new Exception('Password không đúng');
+         throw new Exception('Wrong password');
       }
 
       $accessToken = $this->generateAccessToken($user);
@@ -84,7 +84,7 @@ class AuthService
    public function refreshAccessToken($refreshToken)
    {
       if (empty($refreshToken)) {
-         throw new Exception('Refresh token không được để trống');
+         throw new Exception('Refresh token is required');
       }
 
       try {
@@ -92,14 +92,14 @@ class AuthService
          $decoded = JWT::decode($refreshToken, $key);
 
          if ($decoded->iss !== EnvironmentVariable::get('APP.HOST')) {
-            throw new Exception('Refresh token không hợp lệ');
+            throw new Exception('Refresh token is invalid');
          }
 
          $userId = $decoded->sub;
          $user = $user = $this->userService->findUser('IDUser', $userId);
 
          if (!$user || $user->IsDeleted) {
-            throw new Exception('User không tồn tại hoặc đã bị xóa');
+            throw new Exception('User does not exist');
          }
 
          $newAccessToken = $this->generateAccessToken($user);
@@ -108,7 +108,7 @@ class AuthService
             'access_token' => $newAccessToken
          ];
       } catch (Exception $e) {
-         throw new Exception('Refresh token không hợp lệ hoặc đã hết hạn : ' . $e->getMessage());
+         throw new Exception('Refresh token is invalid or expired : ' . $e->getMessage());
       }
    }
 

@@ -4,7 +4,7 @@ namespace WorkSpace\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class HomeController
+class SystemController
 {
    public function root()
    {
@@ -17,7 +17,8 @@ class HomeController
       $IDUser = $user['IDUser'];
       return new JsonResponse([
          'message' => 'User Inf',
-         'user' => $user
+         'user' => $user,
+         'IDUser' => $IDUser
       ], 200);
    }
 }

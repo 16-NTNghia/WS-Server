@@ -19,7 +19,7 @@ class AuthController
       try {
          $user = $this->AuthService->registerAccount($request->json()->all());
          return new JsonResponse([
-            'message' => 'Tạo tài khoản thành công',
+            'message' => 'Register Successfully',
             'data' => $user
          ], 201);
       } catch (Exception $e) {
@@ -36,7 +36,7 @@ class AuthController
          $result = $this->AuthService->login($credentials);
 
          return new JsonResponse([
-            'message' => 'Đăng nhập thành công',
+            'message' => 'Login Successfully',
             'data' => $result
          ], 200);
       } catch (Exception $e) {
@@ -53,7 +53,7 @@ class AuthController
          $result = $this->AuthService->refreshAccessToken($refreshToken);
 
          return new JsonResponse([
-            'message' => 'Lấy access_token mới thành công',
+            'message' => 'Get new access token successfully',
             'data' => $result
          ], 200);
       } catch (Exception $e) {
