@@ -10,6 +10,7 @@ class PricingPlan extends Entity
       'SubscribedAt' => 'CURRENT_TIMESTAMP',
       'IsDeleted' => false,
    ];
+   protected $timestamps = false;
 
    public function pricing()
    {

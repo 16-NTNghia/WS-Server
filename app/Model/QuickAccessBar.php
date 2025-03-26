@@ -9,6 +9,7 @@ class QuickAccessBar extends Entity
    protected $attributes = [
       'IsDeleted' => false,
    ];
+   protected $timestamps = false;
 
    public function user()
    {

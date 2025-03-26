@@ -9,7 +9,7 @@ class NoteAttachment extends Entity
    protected $attributes = [
       'IsDeleted' => false,
    ];
-
+   protected $timestamps = false;
    public function note()
    {
       return $this->belongsTo(Note::class, 'IDNote', 'IDNote');

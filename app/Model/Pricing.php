@@ -10,7 +10,7 @@ class Pricing extends Entity
       'UnLimitedProjects' => false,
       'IsDeleted' => false,
    ];
-
+   protected $timestamps = false;
    public function plans()
    {
       return $this->hasMany(PricingPlan::class, 'IDPricing', 'IDPricing');

@@ -11,6 +11,7 @@ class TaskAttachment extends Entity
       'IsFinalFile' => false,
       'IsDeleted' => false,
    ];
+   protected $timestamps = false;
 
    public function task()
    {

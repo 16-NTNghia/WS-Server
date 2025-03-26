@@ -11,6 +11,7 @@ class Note extends Entity
       'IsPublic' => false,
       'IsDeleted' => false,
    ];
+   protected $timestamps = false;
 
    public function widget()
    {

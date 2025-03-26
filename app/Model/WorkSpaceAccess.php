@@ -10,7 +10,7 @@ class WorkSpaceAccess extends Entity
       'Permission' => 'View',
       'IsDeleted' => false,
    ];
-
+   protected $timestamps = false;
    public function workspace()
    {
       return $this->belongsTo(Workspace::class, 'IDWorkSpace', 'IDWorkSpace');

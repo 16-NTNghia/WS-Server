@@ -10,6 +10,7 @@ class Widget extends Entity
       'WidgetType' => 'Note',
       'IsDeleted' => false,
    ];
+   protected $timestamps = false;
 
    public function workspace()
    {

@@ -10,6 +10,7 @@ class ProjectAccess extends Entity
       'Permission' => 'View',
       'IsDeleted' => false,
    ];
+   protected $timestamps = false;
 
    public function project()
    {

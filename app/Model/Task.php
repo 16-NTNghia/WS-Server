@@ -11,6 +11,7 @@ class Task extends Entity
       'CreateAt' => 'CURRENT_TIMESTAMP',
       'IsDeleted' => false,
    ];
+   protected $timestamps = false;
 
    public function project()
    {

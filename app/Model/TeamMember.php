@@ -11,6 +11,7 @@ class TeamMember extends Entity
       'JoinAt' => 'CURRENT_TIMESTAMP',
       'IsDeleted' => false,
    ];
+   protected $timestamps = false;
 
    public function team()
    {

@@ -9,7 +9,7 @@ class Status extends Entity
    protected $attributes = [
       'IsDeleted' => false,
    ];
-
+   protected $timestamps = false;
    public function project()
    {
       return $this->belongsTo(Project::class, 'IDProject', 'IDProject');

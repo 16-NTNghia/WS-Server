@@ -13,8 +13,8 @@ class SystemController
 
    public function getUserInfoFromRequest(Request $request): JsonResponse
    {
-      $user = $request->attributes->get('USER');
-      $IDUser = $user['IDUser'];
+      $user = $request->get('USER');
+      $IDUser = $request->get('USER')['IDUser'];
       return new JsonResponse([
          'message' => 'User Inf',
          'user' => $user,
