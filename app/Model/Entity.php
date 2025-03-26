@@ -8,6 +8,10 @@ class Entity extends Model
     public $incrementing = false;
     protected $keyType = 'string';
     protected $primaryKey = 'ID';
+    public $timestamps = false;
+    protected $attributes = [
+        'IsDeleted' => false,
+    ];
 
     protected static function boot()
     {

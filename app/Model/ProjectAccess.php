@@ -7,10 +7,8 @@ class ProjectAccess extends Entity
    protected $primaryKey = 'IDProjectAccess';
    protected $fillable = ['IDProject', 'IDCollaborator', 'Permission', 'IsDeleted'];
    protected $attributes = [
-      'Permission' => 'View',
-      'IsDeleted' => false,
+      'Permission' => 'View'
    ];
-   protected $timestamps = false;
 
    public function project()
    {

@@ -6,10 +6,6 @@ class Team extends Entity
    protected $table = 'TEAM';
    protected $primaryKey = 'IDTeam';
    protected $fillable = ['IDLeader', 'TeamName', 'TeamSize', 'TeamDescription', 'IsDeleted'];
-   protected $attributes = [
-      'IsDeleted' => false,
-   ];
-   protected $timestamps = false;
 
    public function leader()
    {

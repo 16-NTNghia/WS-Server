@@ -7,10 +7,8 @@ class Widget extends Entity
    protected $primaryKey = 'IDWidget';
    protected $fillable = ['IDWorkSpace', 'WidgetType', 'Z_Index', 'Width', 'Height', 'Color', 'PositionX', 'PositionY', 'IsDeleted'];
    protected $attributes = [
-      'WidgetType' => 'Note',
-      'IsDeleted' => false,
+      'WidgetType' => 'Note'
    ];
-   protected $timestamps = false;
 
    public function workspace()
    {

@@ -7,10 +7,9 @@ class WorkSpaceAccess extends Entity
    protected $primaryKey = 'IDWorkSpaceAccess';
    protected $fillable = ['IDWorkSpace', 'IDCollaborator', 'Permission', 'IsDeleted'];
    protected $attributes = [
-      'Permission' => 'View',
-      'IsDeleted' => false,
+      'Permission' => 'View'
    ];
-   protected $timestamps = false;
+   
    public function workspace()
    {
       return $this->belongsTo(Workspace::class, 'IDWorkSpace', 'IDWorkSpace');

@@ -7,10 +7,8 @@ class PricingPlan extends Entity
    protected $primaryKey = 'IDPricingPlan';
    protected $fillable = ['IDPricing', 'IDUser', 'SubscribedAt', 'ExpiredAt', 'IsDeleted'];
    protected $attributes = [
-      'SubscribedAt' => 'CURRENT_TIMESTAMP',
-      'IsDeleted' => false,
+      'SubscribedAt' => 'CURRENT_TIMESTAMP'
    ];
-   protected $timestamps = false;
 
    public function pricing()
    {

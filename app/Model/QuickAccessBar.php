@@ -6,10 +6,6 @@ class QuickAccessBar extends Entity
    protected $table = 'QUICK_ACCESS_BAR';
    protected $primaryKey = 'IDQuickAccessBar';
    protected $fillable = ['IDUser', 'URL', 'IsDeleted'];
-   protected $attributes = [
-      'IsDeleted' => false,
-   ];
-   protected $timestamps = false;
 
    public function user()
    {

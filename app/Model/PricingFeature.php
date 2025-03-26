@@ -6,10 +6,6 @@ class PricingFeature extends Entity
    protected $table = 'PRICING_FEATURE';
    protected $primaryKey = 'IDFeature';
    protected $fillable = ['IDPricing', 'Feature', 'IsDeleted'];
-   protected $attributes = [
-      'IsDeleted' => false,
-   ];
-   protected $timestamps = false;
 
    public function pricing()
    {

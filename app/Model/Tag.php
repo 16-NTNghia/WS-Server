@@ -6,10 +6,6 @@ class Tag extends Entity
    protected $table = 'TAG';
    protected $primaryKey = 'IDTag';
    protected $fillable = ['IDProject', 'TagName', 'IsDeleted'];
-   protected $attributes = [
-      'IsDeleted' => false,
-   ];
-   protected $timestamps = false;
 
    public function project()
    {

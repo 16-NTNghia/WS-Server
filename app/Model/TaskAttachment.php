@@ -9,9 +9,7 @@ class TaskAttachment extends Entity
    protected $attributes = [
       'UploadedAt' => 'CURRENT_TIMESTAMP',
       'IsFinalFile' => false,
-      'IsDeleted' => false,
    ];
-   protected $timestamps = false;
 
    public function task()
    {

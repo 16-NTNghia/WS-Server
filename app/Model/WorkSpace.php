@@ -6,10 +6,6 @@ class WorkSpace extends Entity
    protected $table = 'WORKSPACE';
    protected $primaryKey = 'IDWorkSpace';
    protected $fillable = ['IDUser', 'WorkSpaceName', 'WorkSpaceDescription', 'IsDeleted'];
-   protected $attributes = [
-      'IsDeleted' => false,
-   ];
-   protected $timestamps = false;
 
    public function owner()
    {

@@ -9,9 +9,7 @@ class Note extends Entity
    protected $attributes = [
       'CreatedAt' => 'CURRENT_TIMESTAMP',
       'IsPublic' => false,
-      'IsDeleted' => false,
    ];
-   protected $timestamps = false;
 
    public function widget()
    {

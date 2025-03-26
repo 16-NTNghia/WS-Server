@@ -6,10 +6,6 @@ class Project extends Entity
    protected $table = 'PROJECT';
    protected $primaryKey = 'IDProject';
    protected $fillable = ['IDTeam', 'ProjectName', 'ProjectDescription', 'IsDeleted'];
-   protected $attributes = [
-      'IsDeleted' => false,
-   ];
-   protected $timestamps = false;
 
    public function team()
    {

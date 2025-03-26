@@ -9,9 +9,7 @@ class Task extends Entity
    protected $attributes = [
       'Priority' => 'Low',
       'CreateAt' => 'CURRENT_TIMESTAMP',
-      'IsDeleted' => false,
    ];
-   protected $timestamps = false;
 
    public function project()
    {

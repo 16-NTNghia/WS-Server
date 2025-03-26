@@ -7,10 +7,9 @@ class Pricing extends Entity
    protected $primaryKey = 'IDPricing';
    protected $fillable = ['PricingName', 'Pricing', 'PricingDescription', 'ProjectLimit', 'TeamLimit', 'UnLimitedProjects', 'Duration', 'IsDeleted'];
    protected $attributes = [
-      'UnLimitedProjects' => false,
-      'IsDeleted' => false,
+      'UnLimitedProjects' => false
    ];
-   protected $timestamps = false;
+   
    public function plans()
    {
       return $this->hasMany(PricingPlan::class, 'IDPricing', 'IDPricing');
