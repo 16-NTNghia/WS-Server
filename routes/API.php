@@ -12,6 +12,7 @@ return function (Router $router) {
 
    $router->group(['prefix' => '/'], function (Router $router) {
       $router->get('/', [SystemController::class, 'root']);
+      $router->post('/upload-file-s3', [SystemController::class, 'uploadFileToS3']);
       $router->get('/user-inf', [SystemController::class, 'getUserInfoFromRequest'])->middleware('auth');
    });
 

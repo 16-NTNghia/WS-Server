@@ -27,6 +27,7 @@
 		"illuminate/routing": "^12.2",
 		"illuminate/events": "^12.2",
 		"illuminate/support": "^12.2",
-		"firebase/php-jwt": "^6.11"
+		"firebase/php-jwt": "^6.11",
+		"aws/aws-sdk-php": "^3.342"
 	}
 }
