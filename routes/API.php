@@ -3,6 +3,7 @@ use Illuminate\Routing\Router;
 use WorkSpace\Controller\AuthController;
 use WorkSpace\Controller\SystemController;
 use WorkSpace\Controller\WorkSpaceController;
+use WorkSpace\Controller\ProjectController;
 use Middleware\Authenticate;
 
 return function (Router $router) {
@@ -29,5 +30,11 @@ return function (Router $router) {
    $router->group(['prefix' => 'workspace', 'middleware' => 'auth'], function (Router $router) {
       $router->get('/', [WorkSpaceController::class, 'getWorkSpacesByIDUser']);
       $router->post('/', [WorkSpaceController::class, 'createWorkSpace']);
+   });
+
+   //--------------------------------------------------PROJECT--------------------------------------------------//
+
+   $router->group(['prefix' => 'project', 'middleware' => 'auth'], function (Router $router) {
+      $router->post('/add', [ProjectController::class, 'createNewProject']);
    });
 };
