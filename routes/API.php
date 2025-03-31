@@ -32,6 +32,26 @@ return function (Router $router) {
    $router->group(['prefix' => 'workspace', 'middleware' => 'auth'], function (Router $router) {
       $router->get('/', [WorkSpaceController::class, 'getWorkSpacesByIDUser']);
       $router->post('/', [WorkSpaceController::class, 'createWorkSpace']);
+      $router->delete('/{id}', [WorkSpaceController::class, 'deleteWorkSpace']);
+   });
+
+   //--------------------------------------------------PROJECT--------------------------------------------------//
+
+   $router->group(['prefix' => 'project', 'middleware' => 'auth'], function (Router $router) {
+      $router->post('/add', [ProjectController::class, 'createNewProject']);
+   });
+   
+   //--------------------------------------------------PROJECT--------------------------------------------------//
+
+   $router->group(['prefix' => 'note', 'middleware' => 'auth'], function (Router $router) {
+      $router->put('/modify/{IDNote}', [NoteController::class, 'ModifyNote']);
+   });
+   
+   //--------------------------------------------------PROJECT--------------------------------------------------//
+
+   $router->group(['prefix' => 'widget', 'middleware' => 'auth'], function (Router $router) {
+      $router->get('/{IDWorkSpace}', [WidgetController::class, 'GetAllWidgets']);
+      $router->put('/{IDWorkSpace}/{IDWidget}', [WidgetController::class, 'ModifyWidget']);
    });
 
    //--------------------------------------------------PROJECT--------------------------------------------------//
