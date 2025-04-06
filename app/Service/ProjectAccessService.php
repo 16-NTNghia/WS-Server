@@ -20,26 +20,31 @@ class ProjectAccessService
 
     public function ModifyProjectAccess($data, $IDUser, $IDProject)
     {
-        $existProject = $this->projectModel->where('IDProject', $IDProject)->first();
+        $existProject = $this->projectModel->where('IDProject', $IDProject)
+            ->where('IsDeleted', false)->first();
 
         if (!$existProject) {
             throw new Exception("Project does not exist.");
         }
 
-        $existUser = $this->userModel->where('IDUser', $IDUser)->first();
+        $existUser = $this->userModel->where('IDUser', $IDUser)
+            ->where('IsDeleted', false)->first();
 
         if (!$existUser) {
             throw new Exception("User does not exist.");
         }
 
-        $projectAccess = $this->projectAccessModel->where('IDProject', $IDProject)->where('IDCollaborator', $IDUser)->first();
-        
+        $projectAccess = $this->projectAccessModel
+            ->where('IDProject', $IDProject)
+            ->where('IDCollaborator', $IDUser)
+            ->where('IsDeleted', false)->first();
+
         if (!$projectAccess) {
             throw new Exception("You don't have access to this project.");
         }
 
-        if(!empty($data['Permission'])){
-            switch($data['Permission']){
+        if (!empty($data['Permission'])) {
+            switch ($data['Permission']) {
                 case "Owner":
                 case "Edit":
                 case "View":

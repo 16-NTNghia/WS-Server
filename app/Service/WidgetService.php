@@ -35,12 +35,14 @@ class WidgetService
 
     public function ModifyWidget($data, $IDWorkSpace, $IDWidget){
         try {
-            $workSpace = $this->workSpaceModel->find($IDWorkSpace);
+            $workSpace = $this->workSpaceModel->where('IDWorkSpace', $IDWorkSpace)
+                ->where('IsDeleted', false)->first();
             if (empty($workSpace)) {
                 throw new Exception("WorkSpace not found");
             }
 
-            $modifyWidget = $this->widgetModel->find($IDWidget);
+            $modifyWidget = $this->widgetModel->where('IDWidget', $IDWidget)
+                ->where('IsDeleted', false)->first();
             if (empty($modifyWidget)) {
                 throw new Exception("Widget not found");
             }

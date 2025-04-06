@@ -20,12 +20,12 @@ class NoteService
     {
         try {
 
-            $existUser = $this->userModel->where('IDUser', $IDUser)->first();
+            $existUser = $this->userModel->where('IDUser', $IDUser)->where('IsDeleted', false)->first();
             if (!$existUser) {
                 throw new Exception('User does not exist');
             }
 
-            $updateNote = $this->noteModel->where('IDNote', $IDNote)->first();
+            $updateNote = $this->noteModel->where('IDNote', $IDNote)->where('IsDeleted', false)->first();
             if (!$updateNote) {
                 throw new Exception('Note does not exist');
             }
