@@ -4,6 +4,7 @@ use WorkSpace\Controller\AuthController;
 use WorkSpace\Controller\SystemController;
 use WorkSpace\Controller\WorkSpaceController;
 use WorkSpace\Controller\ProjectController;
+use WorkSpace\Controller\ProjectAccessController;
 use WorkSpace\Controller\NoteController;
 use WorkSpace\Controller\WidgetController;
 use Middleware\Authenticate;
@@ -56,20 +57,7 @@ return function (Router $router) {
 
    //--------------------------------------------------PROJECT--------------------------------------------------//
 
-   $router->group(['prefix' => 'project', 'middleware' => 'auth'], function (Router $router) {
-      $router->post('/add', [ProjectController::class, 'createNewProject']);
-   });
-   
-   //--------------------------------------------------PROJECT--------------------------------------------------//
-
-   $router->group(['prefix' => 'note', 'middleware' => 'auth'], function (Router $router) {
-      $router->put('/modify/{IDNote}', [NoteController::class, 'ModifyNote']);
-   });
-   
-   //--------------------------------------------------PROJECT--------------------------------------------------//
-
-   $router->group(['prefix' => 'widget', 'middleware' => 'auth'], function (Router $router) {
-      $router->get('/{IDWorkSpace}', [WidgetController::class, 'GetAllWidgets']);
-      $router->put('/{IDWorkSpace}/{IDWidget}', [WidgetController::class, 'ModifyWidget']);
+   $router->group(['prefix' => 'projectaccess', 'middleware' => 'auth'], function (Router $router) {
+      $router->put('/modify/{IDProject}/{IDUser}', [ProjectAccessController::class, 'modifyProjectAccess']);
    });
 };

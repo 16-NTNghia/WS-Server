@@ -44,11 +44,15 @@ class ProjectService
         if ($existProject) {
             throw new Exception('Project already exists');
         } else {
-            return $this->project->create([
-                "IDTeam" => $data["IDTeam"],
-                "ProjectName" => $data["ProjectName"],
-                "ProjectDescription" => $data["ProjectDescription"],
-            ]);
+            // return $this->project->create([
+            //     "IDTeam" => $data["IDTeam"],
+            //     "ProjectName" => $data["ProjectName"],
+            //     "ProjectDescription" => $data["ProjectDescription"],
+            // ]);
+
+            $this->project->create($data);
+            
+            return $existProject;
         }
     }
 }
