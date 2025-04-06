@@ -7,6 +7,7 @@ use WorkSpace\Controller\ProjectController;
 use WorkSpace\Controller\ProjectAccessController;
 use WorkSpace\Controller\NoteController;
 use WorkSpace\Controller\WidgetController;
+use WorkSpace\Controller\TaskController;
 use Middleware\Authenticate;
 
 return function (Router $router) {
@@ -42,22 +43,28 @@ return function (Router $router) {
       $router->post('/add', [ProjectController::class, 'createNewProject']);
    });
    
-   //--------------------------------------------------PROJECT--------------------------------------------------//
+   //--------------------------------------------------NOTE--------------------------------------------------//
 
    $router->group(['prefix' => 'note', 'middleware' => 'auth'], function (Router $router) {
       $router->put('/modify/{IDNote}', [NoteController::class, 'ModifyNote']);
    });
    
-   //--------------------------------------------------PROJECT--------------------------------------------------//
+   //--------------------------------------------------WIDGET--------------------------------------------------//
 
    $router->group(['prefix' => 'widget', 'middleware' => 'auth'], function (Router $router) {
       $router->get('/{IDWorkSpace}', [WidgetController::class, 'GetAllWidgets']);
       $router->put('/{IDWorkSpace}/{IDWidget}', [WidgetController::class, 'ModifyWidget']);
    });
 
-   //--------------------------------------------------PROJECT--------------------------------------------------//
+   //--------------------------------------------------PROJECTACCESS--------------------------------------------------//
 
    $router->group(['prefix' => 'projectaccess', 'middleware' => 'auth'], function (Router $router) {
       $router->put('/modify/{IDProject}/{IDUser}', [ProjectAccessController::class, 'modifyProjectAccess']);
+   });
+   
+   //--------------------------------------------------TASK--------------------------------------------------//
+
+   $router->group(['prefix' => 'task', 'middleware' => 'auth'], function (Router $router) {
+      $router->put('/modify/{IDProject}/{IDTask}', [TaskController::class, 'ModifyTaskSDDD']);
    });
 };
