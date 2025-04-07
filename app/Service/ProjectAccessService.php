@@ -3,59 +3,60 @@ namespace WorkSpace\Service;
 use Exception;
 use WorkSpace\Model\Project;
 use WorkSpace\Model\ProjectAccess;
+use WorkSpace\Model\Team;
+use WorkSpace\Model\TeamMember;
 use WorkSpace\Model\User;
 
 class ProjectAccessService
 {
     private $projectAccessModel;
     private $projectModel;
+    private $teamModel;
+    private $teamMemberModel;
     private $userModel;
 
-    public function __construct(ProjectAccess $projectAccessModel, Project $projectModel, User $userModel)
+    public function __construct(ProjectAccess $projectAccessModel, Project $projectModel, Team $teamModel, TeamMember $teamMemberModel, User $userModel)
     {
         $this->projectAccessModel = $projectAccessModel;
         $this->projectModel = $projectModel;
+        $this->teamModel = $teamModel;
+        $this->teamMemberModel = $teamMemberModel;
         $this->userModel = $userModel;
     }
 
-    public function ModifyProjectAccess($data, $IDUser, $IDProject)
+    public function ModifyProjectAccess($IDProject)
     {
+        
         $existProject = $this->projectModel->where('IDProject', $IDProject)
-            ->where('IsDeleted', false)->first();
-
+        ->where('IsDeleted', false)->first();
+        
         if (!$existProject) {
             throw new Exception("Project does not exist.");
         }
-
-        $existUser = $this->userModel->where('IDUser', $IDUser)
-            ->where('IsDeleted', false)->first();
-
-        if (!$existUser) {
-            throw new Exception("User does not exist.");
+        
+        $existTeam = $this->teamModel->where('IDTeam', $existProject->IDTeam)
+        ->where('IsDeleted', false)->first();
+        
+        if (!$existTeam) {
+            throw new Exception("Team does not exist.");
         }
+        
+        $teamMembers = $this->teamMemberModel->where('IDTeam', $existTeam->IDTeam)
+        ->where('IsDeleted', false)->get();
+        
+        global $projectAccess; 
 
-        $projectAccess = $this->projectAccessModel
-            ->where('IDProject', $IDProject)
-            ->where('IDCollaborator', $IDUser)
-            ->where('IsDeleted', false)->first();
-
-        if (!$projectAccess) {
-            throw new Exception("You don't have access to this project.");
-        }
-
-        if (!empty($data['Permission'])) {
-            switch ($data['Permission']) {
-                case "Owner":
-                case "Edit":
-                case "View":
-                    $projectAccess->Permission = $data['Permission'];
-                    break;
-                default:
-                    throw new Exception("Invalid permission.");
+        $projectAccess = $this->projectAccessModel->where('IDProject', $IDProject);
+        
+        foreach ($teamMembers as $member) {
+            if(!$projectAccess->where('IDCollaborator', $member->IDUser)->exists()) {     
+                $projectAccess->create([
+                    'IDProject' => $IDProject,
+                    'IDCollaborator' => $member->IDUser,
+                ]);
             }
         }
 
-        $projectAccess->save();
-        return $projectAccess;
+        return $projectAccess->get();
     }
 }

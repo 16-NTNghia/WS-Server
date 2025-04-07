@@ -15,10 +15,9 @@ class ProjectAccessController
         $this->projectAccessService = $projectAccessService;
     }
 
-    public function modifyProjectAccess(Request $request, $IDProject, $IDUser) {
+    public function modifyProjectAccess($IDProject) {
         try {
-            $data = $request->json()->all();
-            $response = $this->projectAccessService->ModifyProjectAccess($data, $IDUser, $IDProject);
+            $response = $this->projectAccessService->ModifyProjectAccess($IDProject);
             return new JsonResponse([
                 'message' => 'Modify Project Access Successfully',
                 'data' => $response

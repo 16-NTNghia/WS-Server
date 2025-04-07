@@ -32,8 +32,6 @@ class StatusService
             throw new Exception('Same position');
         }
 
-        
-
         $statuses = $this->statusModel->where('IDProject', $IDProject)
             ->where('IsDeleted', false)->get();
         

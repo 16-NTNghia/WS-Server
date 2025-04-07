@@ -60,7 +60,7 @@ return function (Router $router) {
    //--------------------------------------------------PROJECTACCESS--------------------------------------------------//
 
    $router->group(['prefix' => 'projectaccess', 'middleware' => 'auth'], function (Router $router) {
-      $router->put('/modify/{IDProject}/{IDUser}', [ProjectAccessController::class, 'modifyProjectAccess']);
+      $router->put('/modify/{IDProject}', [ProjectAccessController::class, 'modifyProjectAccess']);
    });
    
    //--------------------------------------------------TASK--------------------------------------------------//
