@@ -44,19 +44,23 @@ class ProjectAccessService
         $teamMembers = $this->teamMemberModel->where('IDTeam', $existTeam->IDTeam)
         ->where('IsDeleted', false)->get();
         
-        global $projectAccess; 
+        if (!$teamMembers) {
+            throw new Exception("Team don't have members.");
+        }
 
-        $projectAccess = $this->projectAccessModel->where('IDProject', $IDProject);
+        global $projectAccess;
         
+        $projectAccess = $this->projectAccessModel;
+
         foreach ($teamMembers as $member) {
-            if(!$projectAccess->where('IDCollaborator', $member->IDUser)->exists()) {     
+            if(!$projectAccess->where('IDCollaborator', $member->IDUser)->where('IDProject', $existProject->IDProject)->first()) {  
                 $projectAccess->create([
-                    'IDProject' => $IDProject,
+                    'IDProject' => $existProject->IDProject,
                     'IDCollaborator' => $member->IDUser,
                 ]);
             }
         }
 
-        return $projectAccess->get();
+        return $projectAccess->where('IDProject', $existProject->IDProject)->get();
     }
 }
