@@ -8,6 +8,7 @@ use WorkSpace\Controller\ProjectAccessController;
 use WorkSpace\Controller\NoteController;
 use WorkSpace\Controller\WidgetController;
 use WorkSpace\Controller\TaskController;
+use WorkSpace\Controller\StatusController;
 use Middleware\Authenticate;
 
 return function (Router $router) {
@@ -66,5 +67,11 @@ return function (Router $router) {
 
    $router->group(['prefix' => 'task', 'middleware' => 'auth'], function (Router $router) {
       $router->put('/modify/{IDProject}/{IDTask}', [TaskController::class, 'ModifyTaskSDDD']);
+   });
+   
+   //--------------------------------------------------STATUS--------------------------------------------------//
+
+   $router->group(['prefix' => 'status', 'middleware' => 'auth'], function (Router $router) {
+      $router->put('/modify/{IDProject}', [StatusController::class, 'ModifyOrderStatus']);
    });
 };
